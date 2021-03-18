@@ -10,6 +10,8 @@ import {SettingsEntity} from './entities/settings.entity';
 import {CommandsEntity} from './entities/commands.entity';
 import {MenuEntity} from './entities/menu.entity';
 import {getRepository} from 'typeorm';
+import Mustache from 'mustache';
+import {botName} from './settings';
 
 interface poolContent {
   question: string;
@@ -31,7 +33,11 @@ export async function sendTelegram(
 
     switch (send.type) {
       case 'message':
-        await bot.sendMessage(chatId, send.content, params);
+        await bot.sendMessage(
+          chatId,
+          Mustache.render(send.content, {...msg, botName}),
+          params
+        );
         break;
       case 'photo':
         try {
