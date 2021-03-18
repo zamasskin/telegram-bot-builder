@@ -1,0 +1,9 @@
+.idea
+node_modules
+
+build
+dist
+upload
+.env
+
+src/migrations/demo1615886325758.ts
