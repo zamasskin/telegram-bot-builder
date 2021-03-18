@@ -13,7 +13,6 @@ export const dbUser = env.DB_USER || 'root';
 export const dbPass = env.DB_PASS || '';
 export const dbDatabase = env.DB_NAME || '';
 export const telegramToken = env.TELEGRAM_TOKEN || '';
-export const botName = env.BOT_NAME || 'BigBot';
 
 export const uploadPath = path.resolve(rootPath, env.UPLOAD_PATH || './upload');
 

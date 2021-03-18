@@ -11,11 +11,18 @@ import {CommandsEntity} from './entities/commands.entity';
 import {MenuEntity} from './entities/menu.entity';
 import {getRepository} from 'typeorm';
 import Mustache from 'mustache';
-import {botName} from './settings';
 
 interface poolContent {
   question: string;
   options: string[];
+}
+
+let botInfo: TelegramBot.User;
+async function getBotInfo(bot: TelegramBot) {
+  if (!botInfo) {
+    botInfo = await bot.getMe();
+  }
+  return botInfo;
 }
 
 export async function sendTelegram(
@@ -25,17 +32,17 @@ export async function sendTelegram(
   keyboards: KeyboardButton[][]
 ) {
   const chatId = msg.chat.id;
+  const botInfo = await getBotInfo(bot);
   for (const send of sends) {
     const params = setKeyboardFromParams(
       keyboards,
       send.params ? JSON.parse(send.params) : {}
     );
-
     switch (send.type) {
       case 'message':
         await bot.sendMessage(
           chatId,
-          Mustache.render(send.content, {...msg, botName}),
+          Mustache.render(send.content, {...msg, botInfo: {...botInfo}}),
           params
         );
         break;
