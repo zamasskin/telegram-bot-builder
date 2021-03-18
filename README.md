@@ -13,7 +13,7 @@ DB_PORT=databasePort
 DB_USER=databaseUser
 DB_PASS=databasePassword
 DB_NAME=databaseName
-TELEGRAM_TOKEN=1606329694:AAEiBscB5V51m9TPJTTyqXWaCGRoZUSCUSc
+TELEGRAM_TOKEN=#########################
 ```
 * Выполнить миграцию
 ```sh
