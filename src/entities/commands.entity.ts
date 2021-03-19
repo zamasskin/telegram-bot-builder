@@ -29,4 +29,7 @@ export class CommandsEntity {
   @OneToOne(() => MenuEntity)
   @JoinColumn()
   selectMenu: MenuEntity;
+
+  @OneToOne(() => MenuEntity, menu => menu.command)
+  menu: MenuEntity;
 }
