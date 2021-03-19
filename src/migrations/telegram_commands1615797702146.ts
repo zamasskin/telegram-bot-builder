@@ -8,6 +8,7 @@ interface Command {
   call?: string;
   eachCall?: string;
   selectMenuId: number;
+  aliasId?: number;
 }
 
 const commands: Command[] = [
@@ -28,13 +29,13 @@ const commands: Command[] = [
     selectMenuId: 3,
     eachCall: 'registerBot',
   },
-  {id: 5, command: '/my_bots_back', botId: 1, selectMenuId: 0},
+  {id: 5, command: '/my_bots_back', botId: 1, selectMenuId: 0, aliasId: 1},
   {
     id: 6,
     command: '/create_new_bot_back',
     botId: 1,
     selectMenuId: 1,
-    call: 'showBots',
+    aliasId: 2,
   },
   {
     id: 7,
@@ -55,7 +56,7 @@ const commands: Command[] = [
     command: '/select_bot_back',
     botId: 1,
     selectMenuId: 1,
-    call: 'showBots',
+    aliasId: 2,
   },
   {
     id: 10,
@@ -69,6 +70,7 @@ const commands: Command[] = [
     command: '/my_commands_back',
     botId: 1,
     selectMenuId: 6,
+    aliasId: 7,
   },
   {
     id: 12,
@@ -82,6 +84,7 @@ const commands: Command[] = [
     command: '/delete_bot_back',
     botId: 1,
     selectMenuId: 6,
+    aliasId: 7,
   },
   {
     id: 14,
@@ -110,14 +113,14 @@ const commands: Command[] = [
     command: '/delete_command_back',
     botId: 1,
     selectMenuId: 14,
-    call: 'showSelectCommand',
+    aliasId: 15,
   },
   {
     id: 18,
     command: '/select_command_back',
     botId: 1,
     selectMenuId: 7,
-    call: 'showCommands',
+    aliasId: 8,
   },
   {
     id: 19,
@@ -147,7 +150,7 @@ const commands: Command[] = [
     command: '/add_command_call_back',
     botId: 1,
     selectMenuId: 14,
-    call: 'showSelectCommand',
+    aliasId: 15,
   },
 
   {
@@ -163,7 +166,7 @@ const commands: Command[] = [
     command: '/add_command_each_call_back',
     botId: 1,
     selectMenuId: 14,
-    call: 'showSelectCommand',
+    aliasId: 15,
   },
   {
     id: 25,
