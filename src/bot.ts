@@ -64,6 +64,8 @@ export async function newBot(token: string) {
           'command',
           'command.selectMenu',
           'command.menu',
+          'command.alias',
+          'command.alias.menu',
         ],
       });
 
@@ -87,7 +89,7 @@ export async function newBot(token: string) {
           bot: settings.bot,
           command: msg.text,
         },
-        relations: ['selectMenu', 'menu'],
+        relations: ['selectMenu', 'menu', 'alias', 'alias.menu'],
       });
 
       if (!command) {
@@ -105,13 +107,24 @@ export async function newBot(token: string) {
             parent: settings.command.menu,
             bot: settings.bot,
           },
-          relations: ['command', 'command.selectMenu', 'command.menu'],
+          relations: [
+            'command',
+            'command.selectMenu',
+            'command.menu',
+            'command.alias',
+            'command.alias.menu',
+          ],
         });
 
         const selectMenu = menus.find(m => m.name === msg.text);
         if (selectMenu) {
           command = selectMenu.command;
         }
+      }
+
+      // Надо исполнить алиас а не комманду
+      if (command && command.alias) {
+        command = command.alias;
       }
 
       if (command) {

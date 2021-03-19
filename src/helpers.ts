@@ -27,7 +27,7 @@ export function getKeyboardButtons(menu: MenuEntity[]): KeyboardButton[][] {
 }
 
 export async function getKeyboardButtonByParent(
-  parent: MenuEntity,
+  parent: MenuEntity | MenuEntity[],
   bot: BotsEntity
 ) {
   const menus = await getRepository(MenuEntity).find({
