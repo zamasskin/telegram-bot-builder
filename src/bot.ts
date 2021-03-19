@@ -28,12 +28,12 @@ export async function callCommand(
       await call.apply(null, [bot, msg, settings]);
     }
   } else {
-    if (!settings.command.selectMenu) {
-      settings.command.selectMenu = new MenuEntity();
-      settings.command.selectMenu.id = 0;
+    if (!settings.command.menu) {
+      settings.command.menu = new MenuEntity();
+      settings.command.menu.id = 0;
     }
     const keyboards = await getKeyboardButtonByParent(
-      settings.command.selectMenu,
+      settings.command.menu,
       settings.bot
     );
 
@@ -63,6 +63,7 @@ export async function newBot(token: string) {
           'selectCommand',
           'command',
           'command.selectMenu',
+          'command.menu',
         ],
       });
 
@@ -86,7 +87,7 @@ export async function newBot(token: string) {
           bot: settings.bot,
           command: msg.text,
         },
-        relations: ['selectMenu'],
+        relations: ['selectMenu', 'menu'],
       });
 
       if (!command) {
@@ -94,17 +95,17 @@ export async function newBot(token: string) {
           settings.command = new CommandsEntity();
           settings.command.id = 0;
         }
-        if (!settings.command.selectMenu) {
-          settings.command.selectMenu = new MenuEntity();
-          settings.command.selectMenu.id = 0;
+        if (!settings.command.menu) {
+          settings.command.menu = new MenuEntity();
+          settings.command.menu.id = 0;
         }
 
         const menus = await getRepository(MenuEntity).find({
           where: {
-            parent: settings.command.selectMenu,
+            parent: settings.command.menu,
             bot: settings.bot,
           },
-          relations: ['command', 'command.selectMenu'],
+          relations: ['command', 'command.selectMenu', 'command.menu'],
         });
 
         const selectMenu = menus.find(m => m.name === msg.text);
