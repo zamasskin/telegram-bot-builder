@@ -34,7 +34,7 @@ export async function deleteCommand(
   } else if (message === 'n' || message === 'нет') {
     const command = await getRepository(CommandsEntity).findOne({
       where: {id: 17},
-      relations: ['selectMenu', 'bot'],
+      relations: ['bot', 'menu'],
     });
     if (command) {
       await callCommand(bot, msg, settings, command);

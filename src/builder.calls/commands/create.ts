@@ -19,15 +19,13 @@ export async function createCommand(
   const newCommand = new CommandsEntity();
   newCommand.command = msg.text;
   newCommand.bot = settings.selectBot;
-  newCommand.selectMenu = new MenuEntity();
-  newCommand.selectMenu.id = 0;
   await getConnection().manager.save(newCommand);
 
   settings.selectCommand = newCommand;
 
   const command = await getRepository(CommandsEntity).findOne({
     where: {id: 15},
-    relations: ['selectMenu', 'bot'],
+    relations: ['bot', 'menu'],
   });
   if (command) {
     await callCommand(bot, msg, settings, command);

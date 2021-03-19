@@ -62,7 +62,6 @@ export async function newBot(token: string) {
           'selectBot',
           'selectCommand',
           'command',
-          'command.selectMenu',
           'command.menu',
           'command.alias',
           'command.alias.menu',
@@ -89,7 +88,7 @@ export async function newBot(token: string) {
           bot: settings.bot,
           command: msg.text,
         },
-        relations: ['selectMenu', 'menu', 'alias', 'alias.menu'],
+        relations: ['menu', 'alias', 'alias.menu'],
       });
 
       if (!command) {
@@ -109,7 +108,6 @@ export async function newBot(token: string) {
           },
           relations: [
             'command',
-            'command.selectMenu',
             'command.menu',
             'command.alias',
             'command.alias.menu',

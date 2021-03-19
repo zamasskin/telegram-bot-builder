@@ -49,7 +49,7 @@ export async function unRegisterBot(
   } else if (message === 'n' || message === 'нет') {
     const command = await getRepository(CommandsEntity).findOne({
       where: {id: 7},
-      relations: ['selectMenu', 'bot'],
+      relations: ['bot', 'menu'],
     });
     if (command) {
       await callCommand(bot, msg, settings, command);

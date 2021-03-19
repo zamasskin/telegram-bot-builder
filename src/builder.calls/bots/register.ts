@@ -41,7 +41,7 @@ export async function registerBot(
       settings.selectBot = newBot;
       const command = await getRepository(CommandsEntity).findOne({
         where: {id: 7},
-        relations: ['selectMenu', 'bot'],
+        relations: ['bot', 'menu'],
       });
       if (command) {
         await callCommand(bot, msg, settings, command);

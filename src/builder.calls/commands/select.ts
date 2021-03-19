@@ -23,7 +23,7 @@ export async function selectCommand(
   settings.selectCommand = selectCommand;
   const command = await getRepository(CommandsEntity).findOne({
     where: {id: 15},
-    relations: ['selectMenu', 'bot'],
+    relations: ['bot', 'menu'],
   });
 
   if (command) {

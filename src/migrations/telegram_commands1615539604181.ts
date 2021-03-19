@@ -35,6 +35,7 @@ export class Telegram_commands1615539604181 implements MigrationInterface {
             name: 'selectMenuId',
             type: 'int',
             default: 0,
+            isNullable: true,
           },
           {
             name: 'aliasId',
