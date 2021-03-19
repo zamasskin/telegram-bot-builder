@@ -110,3 +110,42 @@ export async function sendTelegramByCmdMenu(
   await sendTelegram(msg, bot, sends, keyboards);
   settings.command = command;
 }
+
+export async function sendTelegramByCommand(
+  bot: TelegramBot,
+  msg: Message,
+  settings: SettingsEntity,
+  command: CommandsEntity
+) {
+  let parentMenu = command.menu;
+  if (!parentMenu) {
+    parentMenu = new MenuEntity();
+    parentMenu.id = 0;
+  }
+  const sends = await getRepository(SendsEntity).find({command});
+  const menus = await getRepository(MenuEntity).find({
+    where: {
+      bot: settings.bot,
+      parent: parentMenu,
+    },
+  });
+  const keyboards = getKeyboardButtons(menus);
+  await sendTelegram(msg, bot, sends, keyboards);
+  settings.command = command;
+}
+
+export async function sendTelegramByCommandNoMenu(
+  bot: TelegramBot,
+  msg: Message,
+  settings: SettingsEntity,
+  command: CommandsEntity
+) {
+  let parentMenu = command.menu;
+  if (!parentMenu) {
+    parentMenu = new MenuEntity();
+    parentMenu.id = 0;
+  }
+  const sends = await getRepository(SendsEntity).find({command});
+  await sendTelegram(msg, bot, sends, []);
+  settings.command = command;
+}
