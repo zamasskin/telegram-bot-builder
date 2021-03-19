@@ -32,4 +32,8 @@ export class CommandsEntity {
 
   @OneToOne(() => MenuEntity, menu => menu.command)
   menu: MenuEntity;
+
+  @OneToOne(() => CommandsEntity)
+  @JoinColumn()
+  alias: BotsEntity;
 }
