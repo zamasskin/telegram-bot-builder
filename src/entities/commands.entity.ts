@@ -35,5 +35,5 @@ export class CommandsEntity {
 
   @OneToOne(() => CommandsEntity)
   @JoinColumn()
-  alias: BotsEntity;
+  alias: CommandsEntity;
 }
