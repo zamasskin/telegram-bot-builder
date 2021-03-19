@@ -12,7 +12,9 @@ export async function randomQuote(
     'https://api.forismatic.com/api/1.0/?method=getQuote&format=json'
   );
   if (response.data) {
-    await bot.sendMessage(chatId, response.data.quoteAuthor);
+    if (response.data.quoteAuthor) {
+      await bot.sendMessage(chatId, response.data.quoteAuthor);
+    }
     await bot.sendMessage(chatId, response.data.quoteText);
   }
 }
