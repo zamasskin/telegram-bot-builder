@@ -26,10 +26,6 @@ export class CommandsEntity {
   @Column()
   eachCall: string;
 
-  @OneToOne(() => MenuEntity)
-  @JoinColumn()
-  selectMenu: MenuEntity;
-
   @OneToOne(() => MenuEntity, menu => menu.command)
   menu: MenuEntity;
 
