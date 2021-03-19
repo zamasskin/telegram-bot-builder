@@ -19,7 +19,7 @@ const commands: Command[] = [
     call: 'showBots',
     eachCall: 'selectBot',
   },
-  {id: 3, command: '/instructions', botId: 1},
+  {id: 3, command: '/instructions', botId: 1, call: 'sendAndSelectBackCommand'},
   {
     id: 4,
     command: '/addbot',
@@ -157,6 +157,48 @@ const commands: Command[] = [
     command: '/remove_command_each_call',
     botId: 1,
     call: 'clearCommandEachCall',
+  },
+  {
+    id: 27,
+    command: '/help_add_bot',
+    botId: 1,
+    call: 'sendAndSelectBackCommand',
+  },
+  {
+    id: 28,
+    command: '/help_remove_bot',
+    botId: 1,
+    call: 'sendAndSelectBackCommand',
+  },
+  {
+    id: 29,
+    command: '/help_add_command',
+    botId: 1,
+    call: 'sendAndSelectBackCommand',
+  },
+  {
+    id: 30,
+    command: '/help_remove_command',
+    botId: 1,
+    call: 'sendAndSelectBackCommand',
+  },
+  {
+    id: 31,
+    command: '/help_edit_content_command',
+    botId: 1,
+    call: 'sendAndSelectBackCommand',
+  },
+  {
+    id: 32,
+    command: '/help_command_call',
+    botId: 1,
+    call: 'sendAndSelectBackCommand',
+  },
+  {
+    id: 33,
+    command: '/help_command_each_call',
+    botId: 1,
+    call: 'sendAndSelectBackCommand',
   },
 ];
 
