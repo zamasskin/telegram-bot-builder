@@ -27,7 +27,7 @@ export async function checkAccess(bot: BotsEntity, user: UsersEntity) {
 
 export async function checkAccessByMsg(bot: BotsEntity, msg: Message) {
   const user = await getRepository(UsersEntity).findOne({
-    where: [{id: msg.from?.id}, {username: msg.from?.username}],
+    where: [{telegramId: msg.from?.id}, {username: msg.from?.username}],
   });
 
   if (!user) {
@@ -43,11 +43,8 @@ export async function addAccess(
 ) {
   let user = await getRepository(UsersEntity).findOne({username});
   if (!user) {
-    const [{id}] = await getConnection().query(
-      'SELECT IF(MIN(id) < -1, MIN(id), -1) as id FROM telegram_users'
-    );
     user = new UsersEntity();
-    user.id = id;
+    user.telegramId = 0;
     user.username = username;
     user.lastName = user.firstName = user.language = '';
     await getConnection().manager.save(user);

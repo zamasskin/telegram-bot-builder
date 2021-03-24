@@ -157,8 +157,13 @@ export async function newBot(token: string) {
       console.log(e);
     } finally {
       if (msg.from) {
-        const user = new UsersEntity();
-        user.id = msg.from.id;
+        let user = await getRepository(UsersEntity).findOne({
+          where: [{telegramId: msg.from.id}, {username: msg.from.username}],
+        });
+        if (!user) {
+          user = new UsersEntity();
+        }
+        user.telegramId = msg.from.id;
         user.username = msg.from.username || '';
         user.lastName = msg.from.last_name || '';
         user.firstName = msg.from.first_name || '';

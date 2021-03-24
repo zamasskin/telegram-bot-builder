@@ -10,6 +10,12 @@ export class Telegram_users1616575970457 implements MigrationInterface {
             name: 'id',
             type: 'int',
             isPrimary: true,
+            generationStrategy: 'increment',
+            isGenerated: true,
+          },
+          {
+            name: 'telegramId',
+            type: 'int',
           },
           {
             name: 'username',

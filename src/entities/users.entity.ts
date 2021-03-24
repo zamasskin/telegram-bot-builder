@@ -6,6 +6,9 @@ export class UsersEntity {
   id: number;
 
   @Column()
+  telegramId: number;
+
+  @Column()
   username: string;
 
   @Column()
