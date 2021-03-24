@@ -2,6 +2,7 @@ import {BotsEntity} from './entities/bots.entity';
 import {UsersEntity} from './entities/users.entity';
 import {getConnection, getRepository} from 'typeorm';
 import {AccessEntity, AccessType} from './entities/access.entity';
+import {Message} from 'node-telegram-bot-api';
 
 export async function checkAccess(bot: BotsEntity, user: UsersEntity) {
   if (bot.id === 1) {
@@ -22,6 +23,17 @@ export async function checkAccess(bot: BotsEntity, user: UsersEntity) {
     }
   }
   return true;
+}
+
+export async function checkAccessByMsg(bot: BotsEntity, msg: Message) {
+  const user = await getRepository(UsersEntity).findOne({
+    where: [{id: msg.from?.id}, {username: msg.from?.username}],
+  });
+
+  if (!user) {
+    return false;
+  }
+  return checkAccess(bot, user);
 }
 
 export async function addAccess(
