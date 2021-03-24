@@ -18,7 +18,9 @@ export async function checkAccess(bot: BotsEntity, user: UsersEntity) {
       await getConnection().manager.save(access);
       return true;
     } else {
-      const access = accessed.find(access => access.user.id === user.id);
+      const access = accessed.find(
+        access => access.user && access.user.id === user.id
+      );
       return !!access;
     }
   }
