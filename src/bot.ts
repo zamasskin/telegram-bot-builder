@@ -10,6 +10,7 @@ import * as calls from './calls';
 import {sendTelegram} from './sends';
 import {HistoryEntity} from './entities/history.entity';
 import {UsersEntity} from './entities/users.entity';
+import {checkAccess} from './access';
 
 export async function callCommand(
   bot: TelegramBot,
@@ -73,6 +74,12 @@ export async function newBot(token: string) {
         settings = new SettingsEntity();
         settings.chatId = chatId;
         settings.bot = botStorage;
+      }
+
+      const user = new UsersEntity();
+      user.id = msg.from?.id || 0;
+      if (!(await checkAccess(botStorage, user))) {
+        throw new Error('user not found');
       }
 
       const history = new HistoryEntity();
