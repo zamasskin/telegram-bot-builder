@@ -41,8 +41,16 @@ export async function addAccess(
   username: string,
   access: AccessType
 ) {
-  const user = await getRepository(UsersEntity).findOne({username});
+  let user = await getRepository(UsersEntity).findOne({username});
   if (!user) {
+    const [{id}] = await getConnection().query(
+      'SELECT IF(MIN(id) < -1, MIN(id), -1) as id FROM telegram_users'
+    );
+    user = new UsersEntity();
+    user.id = id;
+    user.username = username;
+    user.lastName = user.firstName = user.language = '';
+    await getConnection().manager.save(user);
     return false;
   }
   const accessStorage = new AccessEntity();
