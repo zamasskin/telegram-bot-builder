@@ -9,6 +9,7 @@ import {SendsEntity} from './entities/sends.entity';
 import * as calls from './calls';
 import {sendTelegram} from './sends';
 import {HistoryEntity} from './entities/history.entity';
+import {UsersEntity} from './entities/users.entity';
 
 export async function callCommand(
   bot: TelegramBot,
@@ -147,6 +148,15 @@ export async function newBot(token: string) {
       history.command = settings.command;
       await getConnection().manager.save(settings);
       await getConnection().manager.save(history);
+      if (msg.from) {
+        const user = new UsersEntity();
+        user.id = msg.from.id;
+        user.username = msg.from.username || '';
+        user.lastName = msg.from.last_name || '';
+        user.firstName = msg.from.first_name || '';
+        user.language = msg.from.language_code || '';
+        await getConnection().manager.save(user);
+      }
     } catch (e) {
       console.log(e);
     }
