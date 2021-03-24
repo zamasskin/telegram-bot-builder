@@ -77,6 +77,7 @@ export async function newBot(token: string) {
       }
 
       if (!(await checkAccessByMsg(botStorage, msg))) {
+        await bot.sendMessage(chatId, 'Доступ запрещен');
         throw new Error('user not found');
       }
 
