@@ -5,7 +5,7 @@ import {addAccess, removeAccess} from '../../access';
 import {callCommand} from '../../bot';
 import {CommandsEntity} from '../../entities/commands.entity';
 
-export async function addBotAccess(
+export async function addBuilderAccess(
   bot: TelegramBot,
   msg: Message,
   settings: SettingsEntity
@@ -25,7 +25,7 @@ export async function addBotAccess(
   }
 }
 
-export async function removeBotAccess(
+export async function removeBuilderAccess(
   bot: TelegramBot,
   msg: Message,
   settings: SettingsEntity
