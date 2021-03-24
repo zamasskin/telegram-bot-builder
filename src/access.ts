@@ -59,3 +59,18 @@ export async function addAccess(
   await getConnection().manager.save(accessStorage);
   return true;
 }
+
+export async function removeAccess(bot: BotsEntity, username: string) {
+  const user = await getRepository(UsersEntity).findOne({username});
+  if (!user) {
+    return false;
+  }
+
+  const access = await getRepository(AccessEntity).findOne({bot, user});
+  if (!access) {
+    return false;
+  }
+
+  await getConnection().manager.remove(access);
+  return true;
+}
