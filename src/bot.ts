@@ -148,6 +148,9 @@ export async function newBot(token: string) {
       history.command = settings.command;
       await getConnection().manager.save(settings);
       await getConnection().manager.save(history);
+    } catch (e) {
+      console.log(e);
+    } finally {
       if (msg.from) {
         const user = new UsersEntity();
         user.id = msg.from.id;
@@ -157,8 +160,6 @@ export async function newBot(token: string) {
         user.language = msg.from.language_code || '';
         await getConnection().manager.save(user);
       }
-    } catch (e) {
-      console.log(e);
     }
   });
 
