@@ -17,7 +17,7 @@ export async function addBotAccess(
   }
   await addAccess(settings.bot, msg.text, 'W');
   const command = await getRepository(CommandsEntity).findOne({
-    where: {id: 7},
+    where: {id: 1},
     relations: ['bot', 'menu'],
   });
   if (command) {
@@ -38,7 +38,7 @@ export async function removeBotAccess(
 
   if (await removeAccess(settings.bot, msg.text)) {
     const command = await getRepository(CommandsEntity).findOne({
-      where: {id: 7},
+      where: {id: 1},
       relations: ['bot', 'menu'],
     });
     if (command) {
